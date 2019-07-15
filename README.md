@@ -1,2 +1,2 @@
 # dashQC_BrainMatch
-QC Dashboard for the Bain Match project 
+QC Dashboard for the Brain Match project 
