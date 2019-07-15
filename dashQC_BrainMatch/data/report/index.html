@@ -389,7 +389,7 @@
     <!-- Data in JS form -->
 
     <!-- Description of input files and options -->
-    <script type="text/javascript" src="assets/summary/js/filesIn.js"></script>
+    <!-- <script type="text/javascript" src="assets/summary/js/filesIn.js"></script> -->
 
     <!-- List of subjects -->
     <script src="assets/group/js/listSubject.js"></script>
@@ -966,14 +966,14 @@
 
             // 1. Get initial scan file info for first subject
             var event = { params: { data: { id: "1" } } };
-            var filesIn = buildFilesIn(event);
+            // var filesIn = buildFilesIn(event);
 
             // 2. Add a subject select dropdown based on the subject list
             $("#subject-select").select2({ data: listSubject });
             $("#subject-select").on("select2:select", function (p_event) {
 
                 // Get new file information for this subject
-                filesIn = buildFilesIn(p_event);
+                // filesIn = buildFilesIn(p_event);
 
                 // Perform actions necessary to switch subjects (loading new data, new images)
                 switchSubjects(p_event);
@@ -1047,7 +1047,7 @@
             // }
 
             // Get the file information for the selected subject
-            filesIn = buildFilesIn(event);
+            // filesIn = buildFilesIn(event);
 
             // Switch to the selected subject
             switchSubjects(event);
