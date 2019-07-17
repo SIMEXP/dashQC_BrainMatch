@@ -111,25 +111,23 @@
         }
 
         /* Styling for T1 registration image error painting */
-        #cs-reg-img { 
-            width:256px; height:256px; 
-            margin:20px 60px; 
+        #cs-reg-img {
+            width:256px; height:256px;
+            margin:20px 60px;
             border:1px solid blue;
         }
-        #T1-indVsTemplate { 
-            width:100%; height:100%; 
-            position:relative;
+
         }
-        #T1-img { 
+        #T1-img {
             /*width:100%; height:100%; */
             position:absolute; top:0px; left:0px;
         }
-        #T1-canvas { 
+        #T1-canvas {
             /*width:70%; height:70%; */
-            position: absolute; 
+            position: absolute;
             top:0px; left:0px;
             /*background-color: rgba(255,0,0,.1);*/
-        }         
+        }
 
     </style>
 
@@ -188,7 +186,7 @@
             <!-- <div class="col-sm-3"></div> -->
 
             <div class="col-sm-12">
-                
+
                 <div class="chart-wrapper" id="t1-chart-wrapper">
 
                     <div class="chart-title" id="t1-chart-title">
@@ -198,12 +196,12 @@
                     <div class="chart-stage cs-reg-img" id="t1-chart-stage">
 
                         <div id="T1-indVsTemplate" class="register">
-                            <img class="T1 montage" id="T1-img" src="">
-                        </div>                      
+                            <img class="T1 montage" id="T1-img" src="./assets/general/images/fig_visual_inspection_V5_frontiers.png" width=70%>
+                        </div>
 
                     </div>
 
-                    <div class="chart-notes">Click or press left/right arrows for prev/next subject. Hover over image for template scan. Move mouse away to revert to original image.</div>
+                    <div class="chart-notes"> <font size="3"> <strong>QC protocol for brain registration-</strong> <b>a: brain slices.</b> The rater is presented with two sets of brain slices (3 axial, 3 sagittal and 3 coronal), one of them showing the template in stereotactic space and the other showing an individual T1 brain after registration. In the interface, the two images are superimposed and the rater can flip between them to visually assess the registration.  <b>b: anatomical landmarks.</b> The landmarks for QC included: the outline of the brain (A), tentorium cerebelli  (B), cingulate sulcus  (C), parieto-cingulate sulcus occipital fissure  (D), calcarine fissure (E), the lateral ventricles (F), central sulcus (G) and the hippocampal formation (H) bilaterally. The landmarks were outlined in stereotaxic space.  <b>c: rating guidelines.</b> The boundaries of red landmarks act as “confidence interval” for registration: an area is tagged as a misregistration only if the target structure falls outside the boundaries. <b> d: tags </b>. Raters put tags on each misregistered brain structure.  <b>e: final rating.</b> A final decision is reached on the quality of registration: an image with no tags is rated OK, one or more nonadjacent tags are rated Maybe, two or more adjacent tags are rated Fail. An image that is excessively blurry is also rated Fail. </div></font>
 
                 </div>
 
@@ -251,4 +249,3 @@
 </body>
 
 </html>
-
