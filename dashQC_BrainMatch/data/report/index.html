@@ -5,6 +5,7 @@
 
     <title>BrainMatch QC</title>
 
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <!-- Stylesheets -->
@@ -525,8 +526,6 @@
             // Draws mark on point clicked in registration image
             function drawDot(p_x, p_y, p_imageID, p_canvasID){
 
-                console.log("drawDot");
-
                 var image = document.getElementById(p_imageID);
                 var canvas = document.getElementById(p_canvasID);
 
@@ -595,18 +594,15 @@
             // Redraws points onto registration image
             function redrawAllPoints(p_ignoreDrawStatus) {
 
-                console.log("redrawAllPoints");
-                console.log("number of points for subject " + webStorageElement.m_currentSubject + " " + webStorageElement.points.length);
+                // console.log("redrawAllPoints");
+                // console.log("number of points for subject " + webStorageElement.m_currentSubject + " " + webStorageElement.points.length);
 
                 let subjectPoints = webStorageElement.points;
                 for ( let index = 0; index < subjectPoints.length; index++ ){
 
-                    console.log("index[2]: " + (subjectPoints[index][2]).toString());
-
                     // Already drawn check
                     if ( p_ignoreDrawStatus || !subjectPoints[index][2] ) {
 
-                        console.log("draw");
                         subjectPoints[index][2] = true;
                         drawDot(subjectPoints[index][0], subjectPoints[index][1],
                                 elementIDs.t1Img, elementIDs.t1Canvas);
@@ -814,7 +810,6 @@
                         "left": t1ImgDOM.offsetLeft + "px",
                         "top": t1ImgDOM.offsetTop + "px"
                     });
-                    console.log("t1Img load redrawAllPoints");
                     redrawAllPoints(true);                                       
                 });
 
@@ -884,10 +879,19 @@
                     return;
                 }
 
+                // Switch subjects
+                switchSubjects({ params: { data: { id: findSubjectIDFromName(listSubject, subjectName)} } });
+
                 // Fill in DOM objects
                 $("#" + p_uiList.select).select({ params: { data: { id: foundID } } });
-                $("#" + p_uiList.comments).val(p_webStorageObject.subjects[subjectName].comments);
-                $("#" + p_uiList.status).text(p_webStorageObject.subjects[subjectName].status);
+                if ( subjectName in p_webStorageObject.subjects ) {
+                    
+                    $("#" + p_uiList.comments).val(p_webStorageObject.subjects[subjectName].comments);
+                    $("#" + p_uiList.status).text(p_webStorageObject.subjects[subjectName].status);
+                }
+
+                // Redraw points for the current subject
+                redrawAllPoints(true);
             }
 
 
@@ -981,7 +985,6 @@
             var webStorageElement = new QCDash_WebStorage_SubjectData(
                                             // Object.keys(filesIn.fmri.sessInitialMRI)[0],
                                             datasetID.timestamp,    // New unique data set ID
-                                            // "blahblah",    // New unique data set ID
                                             "Your comments here...",
                                             "registration-comment-textarea",
                                             elementIDs.t1Canvas,
