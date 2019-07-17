@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>Report on the quality of MRI registration</title>
+    <title>BrainMatch QC</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -116,7 +116,8 @@
             border:1px solid blue;
         }
         #T1-indVsTemplate { 
-            width:100%; height:100%; 
+            /*width:100%;*/
+            height:100%; 
             position:relative;
         }
         #T1-img { 
@@ -243,7 +244,6 @@
                     <div class="col-sm-4">
                         <div class="row" style="margin-bottom: 1em;"></div>
                         <div class="row" style="margin-bottom: 1em;">
-                            <div class="col-sm-1"></div>
                             <button type="button" class="btn btn-md" id="registration-undo-point" style="margin-right: 1em;  min-width: 8em;" disabled>Undo Point</button>
                         </div>
                         <div class="row" style="margin-bottom: 1em;">
@@ -719,8 +719,6 @@
             /* Idea from Erin - ability to look through scans, keeping best and worst as stickies to allow scrolling through images for rejection/approval purposes - March 12, 2019 
 
             */
-
-
 
             // Changes subjects with left and right arrows (previous and next, respectively)
             function registrationKeyDown(p_key) {
