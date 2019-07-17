@@ -554,11 +554,9 @@ class QCDash_WebStorage_SubjectData {
         this.m_canvasID = p_canvasID;        
     }
 
-    importSubjectInfo(p_importJSON) {
+    importSubjectInfo(p_importJSON, p_webStorageObject) {
 
         // Object fields
-        
-
         this.m_currentSubject = p_importJSON.lastSubject.name;
         this.m_exportFilePrefix = p_importJSON.exportFile.prefix;
 
@@ -759,9 +757,6 @@ class QCDash_WebStorage_SubjectData {
     // Adds a clicked point to webstorage for this registration image for this QC session
     addPoint(p_x, p_y) {
 
-        console.log("webStorageElement addPoint");
-        console.log(this.m_localStorage);
-
         // Prevent same point from being added multiple times
         let pointsList = this.m_localStorage.data.subjects[this.m_currentSubject].points;
         for ( let index = 0; index < pointsList.length; index++ ) {
@@ -901,6 +896,7 @@ class QCDash_WebStorage_SubjectData {
 
             var reader = new FileReader();
             reader.readAsText(p_filename, "UTF-8");
+            var webStorageObject = p_webStorageObject;
             reader.onload = function (p_event) {
 
                 // $("#" + p_uiList.comments).val("Data file: " + p_event.target.result);
@@ -914,24 +910,23 @@ class QCDash_WebStorage_SubjectData {
 
                     // New QCDash_WebStorage_SubjectData changeover function here
                     // This might do a few of the things below
-                    importSubjectInfo(importedJSON);
-
+                    webStorageObject.importSubjectInfo(importedJSON, webStorageObject);
 
                     // Copy web storage data to local record
-                    p_webStorageObject.saveStorageDataToLocal();
+                    webStorageObject.saveStorageDataToLocal();
 
                     // Generate a new export filename
-                    p_webStorageObject.m_exportFilename = p_webStorageObject.generateNextDashboardFilename();
+                    webStorageObject.m_exportFilename = webStorageObject.generateNextDashboardFilename();
 
                     // Fill in the UI
-                    p_setUIToSubjectCallback(p_webStorageObject, p_subjectList, p_uiList);
+                    p_setUIToSubjectCallback(webStorageObject, p_subjectList, p_uiList);
                     
                 } catch ( error ) {
 
                     console.log("Error: " + error.message);
                     $("#" + p_uiList.comments).val("Error reading file...");                
                 }
-            }.bind(this);
+            };
             reader.onerror = function (p_event) {
 
                 $("#" + p_uiList.comments).val("Error reading file...")
